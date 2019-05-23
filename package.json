@@ -43,7 +43,7 @@
   "homepage": "https://github.com/hg8496/gridvis-client#readme",
   "dependencies": {
     "@hg8496/definitions": "^0.3.4",
-    "@hg8496/gridvis-client": "^1.0.6",
+    "@hg8496/gridvis-client": "^1.0.7",
     "commander": "^2.20.0",
     "moment": "^2.24.0"
   },

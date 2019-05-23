@@ -21,18 +21,16 @@ async function main() {
         url: commander.args[0],
         username: commander.username,
     });
-    console.log(await client.fetchGridVisVersion());
     const projects = await client.projects.list();
     const devices = await client.devices.list(projects[0]);
     const values = await client.values.list(projects[0], devices[0]);
     const activeEnergies = values.filter(value => value.valueType.value.search(/^activeenergyc/gi) >= 0 && (value.timebase === 900 || value.timebase === 3600));
-    console.log(activeEnergies);
-    const now = moment();
-    let then = moment().subtract(2, "years");
-    while(now.isAfter(then)) {
+    const now = moment().hour(5); // Always use 5. hour of the day. Less problems with DST.
+    let then = moment(now).subtract(2, "years");
+    while(now.isSameOrAfter(then)) {
         const date = "ISO8601_" + then.format("YYYY-MM-DD");
         const data = await client.values.getValues(projects[0], devices[0], activeEnergies[0], date, date);
-        console.log(date, data.values.length);
+        //console.log(date, data.values.length);
         then = then.add(1, 'days');
     }
 }
