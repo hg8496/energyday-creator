@@ -1,13 +1,13 @@
 {
   "name": "@hg8496/energyday-creator",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A tool that create proto buffers from GridVis REST API",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "prepare": "npm run build",
     "prepublishOnly": "npm test && npm run lint",
-    "preversion": "npm run lint",
+    "preversion": "npm test && npm run lint",
     "version": "npm run format && git add -A lib",
     "postversion": "git push && git push --tags",
     "build": "tsc",

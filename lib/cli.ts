@@ -1,13 +1,10 @@
 #!/usr/bin/env node
-import { janitza } from "@hg8496/definitions";
 import { GridVisClient } from "@hg8496/gridvis-client";
 import * as commander from "commander";
-import * as fs from "fs";
 import * as moment from "moment";
-import { Writer } from "protobufjs";
+import { EnergyDayCreator } from "./EnergyDayCreator";
 import { findDevice } from "./index";
-import { doesMap, mapToValueStream } from "./mapper";
-import EnergyDay = janitza.values.EnergyDay;
+import { doesMap } from "./mapper";
 
 commander
     .version("1.0.0")
@@ -33,25 +30,12 @@ async function main() {
         const now = moment().hour(5); // Always use 5. hour of the day. Less problems with DST.
         let then = moment(now).subtract(2, "month");
         while (now.isSameOrAfter(then)) {
+            const dayCreator = new EnergyDayCreator(client, prjDevice, then);
             const dayString = then.format("YYYY-MM-DD");
-            const day = EnergyDay.create();
-            day.day = dayString;
-            const date = "ISO8601_" + dayString;
             for (const value of knownValues) {
-                const vs = mapToValueStream(value);
-                const data = await client.values.getValues(project, device, value, date, date);
-                if (data.values.length > 0 && vs) {
-                    vs.values = data.values.map(eValue => eValue.avg);
-                    day.values.push(vs);
-                }
+                await dayCreator.addValue(value);
             }
-            if (!EnergyDay.verify(day)) {
-                const writer: Writer = Writer.create();
-                EnergyDay.encode(day, writer);
-                const wStream = fs.createWriteStream("/tmp/allEnergy" + dayString);
-                wStream.write(writer.finish());
-                wStream.close();
-            }
+            await dayCreator.write("/tmp/allEnergy" + dayString);
             then = then.add(1, "days");
         }
     }
