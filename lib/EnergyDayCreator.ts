@@ -30,12 +30,21 @@ export class EnergyDayCreator {
         }
     }
 
-    public async write(file: string): Promise<void> {
+    public writeToBuffer(): Uint8Array | null {
         if (!EnergyDay.verify(this.day)) {
             const writer: Writer = Writer.create();
             EnergyDay.encode(this.day, writer);
+            return writer.finish();
+        } else {
+            return null;
+        }
+    }
+
+    public async write(file: string): Promise<void> {
+        const buffer = this.writeToBuffer();
+        if (buffer) {
             const wStream = fs.createWriteStream(file);
-            await wStream.write(writer.finish());
+            await wStream.write(buffer);
             await wStream.close();
         }
     }

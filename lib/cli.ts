@@ -3,8 +3,7 @@ import { GridVisClient } from "@hg8496/gridvis-client";
 import * as commander from "commander";
 import * as moment from "moment";
 import { EnergyDayCreator } from "./EnergyDayCreator";
-import { findDevice } from "./index";
-import { doesMap } from "./mapper";
+import { findDevice, findNeededValues } from "./index";
 
 commander
     .version("1.0.0")
@@ -25,8 +24,7 @@ async function main() {
     const prjDevice = await findDevice(client, projectParam, deviceParam);
     if (prjDevice) {
         const { project, device } = prjDevice;
-        const values = await client.values.list(project, device);
-        const knownValues = values.filter(value => doesMap(value));
+        const knownValues = await findNeededValues(client, project, device);
         const now = moment().hour(5); // Always use 5. hour of the day. Less problems with DST.
         let then = moment(now).subtract(2, "month");
         while (now.isSameOrAfter(then)) {

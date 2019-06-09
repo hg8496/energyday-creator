@@ -1,4 +1,7 @@
 import { GridVisClient, IDevice, IProject } from "@hg8496/gridvis-client";
+import { IValueDescription } from "@hg8496/gridvis-client/dist/values/IValueDescription";
+import { EnergyDayCreator } from "./EnergyDayCreator";
+import { doesMap } from "./mapper";
 
 export interface IProjectDevice {
     project: IProject;
@@ -20,3 +23,14 @@ export async function findDevice(
     }
     return result;
 }
+
+export async function findNeededValues(
+    client: GridVisClient,
+    projectName: IProject,
+    device: IDevice,
+): Promise<IValueDescription[]> {
+    const values = await client.values.list(projectName, device);
+    return values.filter(value => doesMap(value));
+}
+
+export { EnergyDayCreator };
