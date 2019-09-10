@@ -25,7 +25,7 @@ export class EnergyDayCreator {
         const { project, device } = this.projectDevice;
         const data = await this.client.values.getValues(project, device, value, date, date);
         if (data.values.length > 0 && vs && this.day.values) {
-            vs.values = data.values.map(eValue => eValue.avg);
+            vs.values = data.values.map(eValue => (eValue.max ? eValue.max : eValue.avg));
             this.day.values.push(vs);
         }
     }
