@@ -1,5 +1,6 @@
 import { janitza } from "@hg8496/definitions";
 import { GridVisClient } from "@hg8496/gridvis-client";
+import { ITimedValue } from "@hg8496/gridvis-client/dist/values/ITimedValue";
 import { IValueDescription } from "@hg8496/gridvis-client/dist/values/IValueDescription";
 import * as fs from "fs";
 import { Moment } from "moment";
@@ -9,8 +10,12 @@ import { Writer } from "protobufjs";
 import { IProjectDevice } from "./index";
 import { mapToValueStream } from "./mapper";
 
+export function mapITimedValueToNumber(value: ITimedValue): number {
+    return value.max && (!isNaN(value.max)) && isFinite(value.max) ? value.max : value.avg
+}
+
 export class EnergyDayCreator {
-    private day: IEnergyDay;
+    private readonly day: IEnergyDay;
 
     constructor(private client: GridVisClient, private projectDevice: IProjectDevice, private date: Moment) {
         const dayString = date.format("YYYY-MM-DD");
@@ -25,7 +30,7 @@ export class EnergyDayCreator {
         const { project, device } = this.projectDevice;
         const data = await this.client.values.getValues(project, device, value, date, date);
         if (data.values.length > 0 && vs && this.day.values) {
-            vs.values = data.values.map(eValue => (eValue.max ? eValue.max : eValue.avg));
+            vs.values = data.values.map(mapITimedValueToNumber);
             this.day.values.push(vs);
         }
     }
