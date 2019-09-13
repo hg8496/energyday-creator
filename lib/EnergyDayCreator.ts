@@ -11,7 +11,7 @@ import { IProjectDevice } from "./index";
 import { mapToValueStream } from "./mapper";
 
 export function mapITimedValueToNumber(value: ITimedValue): number {
-    return value.max && (!isNaN(value.max)) && isFinite(value.max) ? value.max : value.avg
+    return value.max && !isNaN(value.max) && isFinite(value.max) ? value.max : value.avg;
 }
 
 export class EnergyDayCreator {
