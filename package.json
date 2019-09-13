@@ -1,6 +1,6 @@
 {
   "name": "@hg8496/energyday-creator",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "A tool that create proto buffers from GridVis REST API",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -42,7 +42,7 @@
   },
   "homepage": "https://github.com/hg8496/gridvis-client#readme",
   "dependencies": {
-    "@hg8496/definitions": "^0.3.7",
+    "@hg8496/definitions": "^1.0.0",
     "@hg8496/gridvis-client": "^1.0.17",
     "commander": "^2.20.0",
     "moment": "^2.24.0"
