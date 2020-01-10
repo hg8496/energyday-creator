@@ -7,13 +7,15 @@ it("Expect to return null on unknown values", () => {
     expect(mapInputToProtoBuffer("asdf")).toBe(null);
 });
 
-[{ input: "10", channel: 10 }, { input: "Input1", channel: 1 }, { input: "Input_2", channel: 2 }].forEach(
-    ({ input, channel }) => {
-        it(`Check there is a non null answer when asked for ${input}`, () => {
-            expect(mapInputToProtoBuffer(input)).toStrictEqual(new Input({ channel }));
-        });
-    },
-);
+[
+    { input: "10", channel: 10 },
+    { input: "Input1", channel: 1 },
+    { input: "Input_2", channel: 2 },
+].forEach(({ input, channel }) => {
+    it(`Check there is a non null answer when asked for ${input}`, () => {
+        expect(mapInputToProtoBuffer(input)).toStrictEqual(new Input({ channel }));
+    });
+});
 
 [
     { input: "L1", line: Line.L1 },

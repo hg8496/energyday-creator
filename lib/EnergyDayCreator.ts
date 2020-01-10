@@ -17,7 +17,12 @@ export function mapITimedValueToNumber(value: ITimedValue): number {
 export class EnergyDayCreator {
     private readonly day: IEnergyDay;
 
-    constructor(private client: GridVisClient, private projectDevice: IProjectDevice, private date: Moment) {
+    constructor(
+        private client: GridVisClient,
+        private projectDevice: IProjectDevice,
+        private date: Moment,
+        private tz?: string,
+    ) {
         const dayString = date.format("YYYY-MM-DD");
         this.day = EnergyDay.create();
         this.day.day = dayString;
@@ -28,7 +33,7 @@ export class EnergyDayCreator {
         const date = "ISO8601_" + this.day.day;
         const vs = mapToValueStream(value);
         const { project, device } = this.projectDevice;
-        const data = await this.client.values.getValues(project, device, value, date, date);
+        const data = await this.client.values.getValues(project, device, value, date, date, this.tz);
         if (data.values.length > 0 && vs && this.day.values) {
             vs.values = data.values.map(mapITimedValueToNumber);
             this.day.values.push(vs);
