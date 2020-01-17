@@ -1,5 +1,6 @@
 import { janitza } from "@hg8496/definitions";
 import Input = janitza.values.Input;
+import Line = janitza.values.Line;
 
 export function mapInputToProtoBuffer(input: string): Input | null {
     let result = null;
@@ -27,6 +28,34 @@ export function mapInputToProtoBuffer(input: string): Input | null {
             if (match) {
                 result = new Input({ channel: Number(match[0]) });
             }
+    }
+    return result;
+}
+export function mapProtoBufferToInput(input: Input): string | null {
+    let result = null;
+    if (input.line) {
+        switch (input.line) {
+            case Line.L1:
+                result = "L1";
+                break;
+            case Line.L2:
+                result = "L2";
+                break;
+            case Line.L3:
+                result = "L3";
+                break;
+            case Line.L4:
+                result = "L4";
+                break;
+            case Line.N:
+                result = "N";
+                break;
+            case Line.SUM13:
+                result = "SUM13";
+                break;
+        }
+    } else if (input.channel) {
+        result = `Input-${input.channel}`;
     }
     return result;
 }
