@@ -11,6 +11,8 @@ it("Expect to return null on unknown values", () => {
     { input: "10", channel: 10 },
     { input: "Input1", channel: 1 },
     { input: "Input_2", channel: 2 },
+    { input: "DigitalIn1", channel: 1 },
+    { input: "DigitalIn2", channel: 2 },
 ].forEach(({ input, channel }) => {
     it(`Check there is a non null answer when asked for ${input}`, () => {
         expect(mapInputToProtoBuffer(input)).toStrictEqual(new Input({ channel }));
@@ -21,6 +23,7 @@ it("Expect to return null on unknown values", () => {
     { input: "L1", line: Line.L1 },
     { input: "L2", line: Line.L2 },
     { input: "L3", line: Line.L3 },
+    { input: "L4", line: Line.L4 },
     { input: "N", line: Line.N },
     { input: "SUM13", line: Line.SUM13 },
 ].forEach(({ input, line }) => {

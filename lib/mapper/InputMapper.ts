@@ -13,6 +13,9 @@ export function mapInputToProtoBuffer(input: string): Input | null {
         case "L3":
             result = new Input({ line: janitza.values.Line.L3 });
             break;
+        case "L4":
+            result = new Input({ line: janitza.values.Line.L4 });
+            break;
         case "N":
             result = new Input({ line: janitza.values.Line.N });
             break;

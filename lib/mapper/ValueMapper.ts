@@ -28,6 +28,12 @@ export function mapGridVisToProtoBuffer(value: string): EnergyValueType | null {
         case "PowerReactivefund":
             result = EnergyValueType.ReactivePower;
             break;
+        case "Water":
+            result = EnergyValueType.Water;
+            break;
+        case "Gas":
+            result = EnergyValueType.Gas;
+            break;
     }
     return result;
 }
@@ -58,6 +64,12 @@ export function mapProtoBufferToGridVis(value: EnergyValueType): string | null {
             break;
         case EnergyValueType.ReactivePower:
             result = "PowerReactivefund";
+            break;
+        case EnergyValueType.Water:
+            result = "Water";
+            break;
+        case EnergyValueType.Gas:
+            result = "Gas";
             break;
     }
     return result;
