@@ -1,8 +1,9 @@
 import { janitza } from "@hg8496/definitions";
 import Input = janitza.values.Input;
 import Line = janitza.values.Line;
+import IInput = janitza.values.IInput;
 
-export function mapInputToProtoBuffer(input: string): Input | null {
+export function mapInputToProtoBuffer(input: string): IInput | null {
     let result = null;
     switch (input) {
         case "L1":
@@ -31,7 +32,7 @@ export function mapInputToProtoBuffer(input: string): Input | null {
     }
     return result;
 }
-export function mapProtoBufferToInput(input: Input): string | null {
+export function mapProtoBufferToInput(input: IInput): string | null {
     let result = null;
     if (input.line) {
         switch (input.line) {
