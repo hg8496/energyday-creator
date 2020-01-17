@@ -21,7 +21,7 @@ it("Expect to return correct enum on known value", () => {
     "ActiveEnergySupplied",
     "ApparentEnergy",
     "ReactiveEnergy",
-    "Water"
+    "Water",
 ].forEach(value => {
     it(`Check there is a non null answer when asked for ${value}`, () => {
         expect(mapGridVisToProtoBuffer(value)).toBeGreaterThanOrEqual(0);
