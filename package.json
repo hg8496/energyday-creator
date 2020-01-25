@@ -43,12 +43,12 @@
   "homepage": "https://github.com/hg8496/gridvis-client#readme",
   "dependencies": {
     "@hg8496/definitions": "^1.0.5",
-    "@hg8496/gridvis-client": "^1.0.17",
+    "@hg8496/gridvis-client": "^1.0.19",
     "commander": "^2.20.0",
     "moment": "^2.24.0"
   },
   "devDependencies": {
-    "@types/jest": "^24.9.0",
+    "@types/jest": "^24.9.1",
     "@types/node": "^11.13.20",
     "coveralls": "^3.0.6",
     "jest": "^24.9.0",
