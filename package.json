@@ -1,6 +1,6 @@
 {
   "name": "@hg8496/energyday-creator",
-  "version": "1.0.19",
+  "version": "1.0.20",
   "description": "A tool that create proto buffers from GridVis REST API",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -43,21 +43,21 @@
   "homepage": "https://github.com/hg8496/gridvis-client#readme",
   "dependencies": {
     "@hg8496/definitions": "^1.0.5",
-    "@hg8496/gridvis-client": "^1.2.1",
-    "commander": "^2.20.0",
+    "@hg8496/gridvis-client": "^1.3.1",
+    "commander": "^5.0.0",
     "moment": "^2.24.0"
   },
   "devDependencies": {
-    "@types/jest": "^24.9.1",
-    "@types/node": "^11.15.5",
-    "coveralls": "^3.0.6",
-    "husky": "^4.2.1",
-    "jest": "^24.9.0",
-    "prettier": "^1.18.2",
-    "ts-jest": "^24.1.0",
-    "tslint": "^5.20.0",
+    "@types/jest": "^25.1.4",
+    "@types/node": "^13.9.1",
+    "coveralls": "^3.0.9",
+    "husky": "^4.2.3",
+    "jest": "^25.1.0",
+    "prettier": "^1.19.1",
+    "ts-jest": "^25.2.1",
+    "tslint": "^6.1.0",
     "tslint-config-prettier": "^1.18.0",
-    "typescript": "^3.7.5"
+    "typescript": "^3.8.3"
   },
   "husky": {
     "hooks": {
