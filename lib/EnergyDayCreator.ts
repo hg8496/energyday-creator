@@ -33,7 +33,7 @@ export class EnergyDayCreator {
         const date = "ISO8601_" + this.day.day;
         const vs = mapToValueStream(value);
         const { project, device } = this.projectDevice;
-        const data = await this.client.values.getValues(project, device, value, date, date, this.tz);
+        const data = await this.client.values.getValues(project, device, value, date, date, this.tz, value.online);
         if (data.values.length > 0 && vs && this.day.values) {
             vs.values = data.values.map(mapITimedValueToNumber);
             this.day.values.push(vs);
